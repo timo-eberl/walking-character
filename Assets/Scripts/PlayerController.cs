@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
     [SerializeField, Range(0f, 6f)] private float walkSpeed = 3f;
     [SerializeField, Range(0f, 6f)] private float sprintSpeed = 6f;
     [SerializeField, Min(0f)] private float acceleration = 8f;
@@ -48,6 +47,34 @@ public class PlayerController : MonoBehaviour
             targetAngle = Mathf.Atan2(moveInputDirection.x, moveInputDirection.y) * Mathf.Rad2Deg;
         }
         currentAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref currentAngleVelocity, 1f - rotationSpeed) % 360f;
-        playerTransform.rotation = Quaternion.Euler(0, currentAngle, 0);
+        transform.rotation = Quaternion.Euler(0, currentAngle, 0);
+
+        // walking / sprinting
+        float targetVelocity;
+        if (!moveInputPressed)
+        {
+            targetVelocity = 0f;
+        }
+        else if (sprintInputPressed)
+        {
+            targetVelocity = sprintSpeed;
+        }
+        else
+        {
+            targetVelocity = walkSpeed * moveInputDirection.magnitude;
+        }
+        if (targetVelocity > currentVelocity)
+        {
+            // accelerate
+            currentVelocity = Mathf.MoveTowards(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            // decelerate
+            currentVelocity = Mathf.MoveTowards(currentVelocity, targetVelocity, deceleration * Time.deltaTime);
+        }
+
+        // final movement
+        characterController.Move(transform.rotation * Vector3.forward * currentVelocity * Time.deltaTime);
     }
 }
