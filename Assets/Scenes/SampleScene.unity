@@ -150,7 +150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7004220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75eaf015efc43ee4eac3a30a95dd9de6, type: 3}
   m_Name: 
@@ -608,6 +608,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6116258071737800471, guid: c0189e0a376e5d54e80cc20646e37e6a, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Length
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116258071737800471, guid: c0189e0a376e5d54e80cc20646e37e6a, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116258071737800471, guid: c0189e0a376e5d54e80cc20646e37e6a, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 7004225}
     - target: {fileID: 9064894792336538743, guid: c0189e0a376e5d54e80cc20646e37e6a, type: 3}
       propertyPath: minimumWalkSpeed
       value: 0.325
