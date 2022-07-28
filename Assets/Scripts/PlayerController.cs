@@ -1,11 +1,12 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController), typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField, Range(0f, 6f)] private float walkSpeed = 3f;
     [SerializeField, Range(0f, 6f)] private float sprintSpeed = 6f;
+    [SerializeField, Range(0f, 6f)] private float minimumMovementSpeed = 0.5f;
     [SerializeField, Min(0f)] private float acceleration = 8f;
     [SerializeField, Min(0f)] private float deceleration = 16f;
     [SerializeField, Range(0f, 1f)] private float rotationSpeed = 0.8f;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction sprintAction;
+    private Animator animator;
 
     private float currentVelocity = 0f;
     private float currentAngle = 0f;
@@ -27,11 +29,14 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Enable();
         moveAction = playerInput.asset.FindAction("Player/Move");
         sprintAction = playerInput.asset.FindAction("Player/Sprint");
+
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         Move();
+        Animate();
     }
 
     private void Move()
@@ -62,6 +67,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             targetVelocity = walkSpeed * moveInputDirection.magnitude;
+            if (targetVelocity < minimumMovementSpeed)
+            {
+                targetVelocity = 0f;
+            }
         }
         if (targetVelocity > currentVelocity)
         {
@@ -76,5 +85,12 @@ public class PlayerController : MonoBehaviour
 
         // final movement
         characterController.Move(transform.rotation * Vector3.forward * currentVelocity * Time.deltaTime);
+
+        Debug.Log("currentVelocity: " + currentVelocity);
+    }
+
+    private void Animate()
+    {
+        animator.SetFloat(Animator.StringToHash("Velocity"), currentVelocity);
     }
 }
