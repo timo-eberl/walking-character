@@ -5,7 +5,8 @@ using UnityEngine.Animations.Rigging;
 public class WeightAdjuster : MonoBehaviour
 {
     [SerializeField] private Transform lookAt;
-    [SerializeField] private float headTurnSpeed = 2f;
+    [SerializeField, Range(0.1f, 4f)] private float headTurnSpeed = 2f;
+    [SerializeField, Range(0f, 180f)] private float headTurnAngle = 90f;
 
     private Rig rig;
 
@@ -20,7 +21,7 @@ public class WeightAdjuster : MonoBehaviour
         Vector3 direction = transform.position - lookAt.position;
         direction.y = 0f;
         float angle = Vector3.Angle(direction, transform.forward);
-        bool isBehind = angle < 110f;
+        bool isBehind = angle < 180f - headTurnAngle;
 
         if (isBehind)
         {
