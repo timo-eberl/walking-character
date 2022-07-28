@@ -83,10 +83,8 @@ public class PlayerController : MonoBehaviour
             currentVelocity = Mathf.MoveTowards(currentVelocity, targetVelocity, deceleration * Time.deltaTime);
         }
 
-        // final movement
+        // move in the direction the player is facing
         characterController.Move(transform.rotation * Vector3.forward * currentVelocity * Time.deltaTime);
-
-        Debug.Log("currentVelocity: " + currentVelocity);
     }
 
     private void Animate()
