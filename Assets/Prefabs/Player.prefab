@@ -904,6 +904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2560869335617253884}
   - component: {fileID: 5020056630037170982}
+  - component: {fileID: 5382220661915374277}
   m_Layer: 0
   m_Name: Rig 1
   m_TagString: Untagged
@@ -941,6 +942,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Effectors: []
+--- !u!114 &5382220661915374277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2516336449751894777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e361f4e49a30814a879da6d4cfd4fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 2284957157210751674}
+  lookAt: {fileID: 0}
 --- !u!1 &2535584714205088117
 GameObject:
   m_ObjectHideFlags: 0
